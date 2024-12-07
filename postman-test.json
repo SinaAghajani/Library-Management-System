@@ -1,0 +1,122 @@
+{
+    "requests": [
+      {
+        "name": "Register User",
+        "method": "POST",
+        "url": "http://localhost:3000/auth/register",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "username": "testuser",
+          "password": "testpassword"
+        }
+      },
+      {
+        "name": "Login User",
+        "method": "POST",
+        "url": "http://localhost:3000/auth/login",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "username": "testuser",
+          "password": "testpassword"
+        }
+      },
+      {
+        "name": "Get User Profile (Protected)",
+        "method": "GET",
+        "url": "http://localhost:3000/users/profile",
+        "headers": {
+          "Authorization": "Bearer <access_token>"
+        }
+      },
+      {
+        "name": "Create Book",
+        "method": "POST",
+        "url": "http://localhost:3000/books",
+        "headers": {
+          "Authorization": "Bearer <access_token>",
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "title": "The Great Book",
+          "author": "John Doe",
+          "category": "Fiction",
+          "available": true
+        }
+      },
+      {
+        "name": "Get All Books",
+        "method": "GET",
+        "url": "http://localhost:3000/books",
+        "headers": {
+          "Authorization": "Bearer <access_token>"
+        }
+      },
+      {
+        "name": "Get Book by ID",
+        "method": "GET",
+        "url": "http://localhost:3000/books/<book_id>",
+        "headers": {
+          "Authorization": "Bearer <access_token>"
+        }
+      },
+      {
+        "name": "Update Book",
+        "method": "PUT",
+        "url": "http://localhost:3000/books/<book_id>",
+        "headers": {
+          "Authorization": "Bearer <access_token>",
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "title": "Updated Book Title",
+          "author": "John Doe",
+          "category": "Non-Fiction",
+          "available": false
+        }
+      },
+      {
+        "name": "Delete Book",
+        "method": "DELETE",
+        "url": "http://localhost:3000/books/<book_id>",
+        "headers": {
+          "Authorization": "Bearer <access_token>"
+        }
+      },
+      {
+        "name": "Loan Book",
+        "method": "POST",
+        "url": "http://localhost:3000/loans",
+        "headers": {
+          "Authorization": "Bearer <access_token>",
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "bookId": "<book_id>",
+          "userId": "<user_id>",
+          "loanDate": "2024-12-06",
+          "returnDate": "2024-12-20"
+        }
+      },
+      {
+        "name": "Get Loaned Books",
+        "method": "GET",
+        "url": "http://localhost:3000/loans",
+        "headers": {
+          "Authorization": "Bearer <access_token>"
+        }
+      },
+      {
+        "name": "Return Book",
+        "method": "PUT",
+        "url": "http://localhost:3000/loans/<loan_id>/return",
+        "headers": {
+          "Authorization": "Bearer <access_token>"
+        }
+      }
+    ]
+  }
+  

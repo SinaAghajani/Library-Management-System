@@ -1,0 +1,100 @@
+{
+    "project": {
+      "name": "Library Management System",
+      "structure": {
+        "src": {
+          "app.module.ts": "Root module of the application",
+          "auth": {
+            "auth.module.ts": "Handles user authentication and authorization",
+            "auth.service.ts": "Contains business logic for authentication",
+            "auth.controller.ts": "Handles HTTP routes for authentication",
+            "jwt.strategy.ts": "Handles JWT token validation",
+            "schemas": {},
+            "dto": {}
+          },
+          "books": {
+            "books.module.ts": "Manages book-related functionality",
+            "books.service.ts": "Business logic for books",
+            "books.controller.ts": "HTTP routes for managing books",
+            "schemas": {
+              "book.schema.ts": "Mongoose schema for books"
+            },
+            "dto": {
+              "create-book.dto.ts": "DTO for creating a book",
+              "update-book.dto.ts": "DTO for updating a book"
+            }
+          },
+          "loans": {
+            "loans.module.ts": "Manages book loaning functionality",
+            "loans.service.ts": "Business logic for loans",
+            "loans.controller.ts": "HTTP routes for managing loans",
+            "schemas": {
+              "loan.schema.ts": "Mongoose schema for loans"
+            },
+            "dto": {
+              "create-loan.dto.ts": "DTO for creating a loan"
+            }
+          },
+          "users": {
+            "users.module.ts": "Handles user-related operations",
+            "users.service.ts": "Business logic for users",
+            "users.controller.ts": "HTTP routes for managing users",
+            "schemas": {
+              "user.schema.ts": "Mongoose schema for users"
+            },
+            "dto": {
+              "create-user.dto.ts": "DTO for creating a user"
+            }
+          },
+          "config": {
+            "config.module.ts": "Manages configuration setup",
+            "config.service.ts": "Provides configuration values to other modules"
+          },
+          "common": {
+            "guards": {
+              "jwt-auth.guard.ts": "Guard for protecting routes with JWT"
+            },
+            "interceptors": {},
+            "pipes": {}
+          }
+        },
+        "config": {
+          ".env": "Environment variables like DATABASE_URI and JWT_SECRET"
+        }
+      },
+      "dependencies": {
+        "nestjs": "Framework core",
+        "mongoose": "Database ORM for MongoDB",
+        "passport": "Authentication middleware",
+        "jsonwebtoken": "JWT token generation and verification",
+        "dotenv": "Environment variable management"
+      },
+      "relationships": {
+        "AuthModule": {
+          "imports": ["PassportModule", "JwtModule", "MongooseModule", "UsersModule"],
+          "providers": ["AuthService", "JwtStrategy"],
+          "exports": ["AuthService"]
+        },
+        "BooksModule": {
+          "imports": ["MongooseModule"],
+          "providers": ["BooksService"],
+          "controllers": ["BooksController"]
+        },
+        "LoansModule": {
+          "imports": ["MongooseModule", "BooksModule", "UsersModule"],
+          "providers": ["LoansService"],
+          "controllers": ["LoansController"]
+        },
+        "UsersModule": {
+          "imports": ["MongooseModule"],
+          "providers": ["UsersService"],
+          "controllers": ["UsersController"]
+        },
+        "ConfigModule": {
+          "providers": ["ConfigService"],
+          "exports": ["ConfigService"]
+        }
+      }
+    }
+  }
+  
